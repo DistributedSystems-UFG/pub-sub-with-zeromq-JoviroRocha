@@ -1,39 +1,29 @@
-from constPS import * #-
+import zmq
+import constPS #-
 import threading
+import rpyc
 
-def goodbye():
-  print("  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.\n" +
-       ":::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\n" +
-       "'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `")
-  print("\n                GOODBYE! HOPE TO SEE YOU AGAIN\n")
-  print("  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.\n" +
-      ":::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\n" +
-      "'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `\n\n")
+class SubscriberHandler(threading.Thread):
+  def __init__(self):
+        threading.Thread.__init__(self)
+        context = zmq.Context()
+        s = context.socket(zmq.SUB)          # create a subscriber socket
+        p = "tcp://"+ constPS.HOST +":"+ constPS.PORT        # how and where to communicate
+        s.connect(p)                         # connect to the server
+        print("Choose the topics that you want to subscribe: \nThe following topics are available: ")
+        for item in constPS.registry_topics:
+	        print(item)
+        topics = input("Enter all topics you want to subscribe to on the same line and separated by a space: ").split()
+        for item in topics:
+	        s.setsockopt_string(zmq.SUBSCRIBE, item)  # subscribe to TIME messages
+        while True:
+	        message = s.recv()   # receive a message
+	        print (bytes.decode(message))
 
-def welcome():
-  print("  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.\n" +
-       ":::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\n" +
-       "'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `")
-  print("\n                WELCOME TO THE LIST MANAGER!\n" +
-        "                   WE ARE CONFIGURING YOUR CHAT\n")
-  print("  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.\n" +
-      ":::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\n" +
-      "'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `\n\n")
-  return menu()
-
-def menu():
-  return input("CHOOSE THE OPTION THAT BEST FITS YOUR NEEDS:\n1 - PRINT THE ENTIRE LIST.\n2 - SEARCH FOR A VALUE IN THE LIST.\n3 - ADD A VALUE TO THE LIST.\n" +
-              "4 - APPEND ANOTHER LIST TO THE LIST. \n5 - REMOVE A VALUE FROM THE LIST. \n6 - SORT THE LIST \n0 - EXIT THE LIST MANAGER\n")
-
-class RecHandler
-
-def run():
-    welcome()
-    x = menu()
-
-    while(x != 0):
-        x = menu()
-    goodbye()
-
-if __name__ == '__main__':
-    run()    
+subscriber_thread = SubscriberHandler()
+subscriber_thread.start()
+conn = rpyc.connect(constPS.HOST, constPS.PORT)
+while True:
+    topic = input("Enter the topic: ")
+    message = input("Enter the message: ")
+    conn.root.exposed_publish(topic, message)
