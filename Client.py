@@ -7,9 +7,10 @@ class SubscriberHandler(threading.Thread):
   def __init__(self):
     threading.Thread.__init__(self)
 
-  def run(self):  
-      message = s.recv()   # receive a message
-      print (bytes.decode(message))
+  def run(self):
+      while True:  
+        message = s.recv()
+        print (bytes.decode(message))
 
 context = zmq.Context()
 s = context.socket(zmq.SUB)          # create a subscriber socket
