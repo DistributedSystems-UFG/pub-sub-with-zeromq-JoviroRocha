@@ -6,10 +6,11 @@ import rpyc
 class SubscriberHandler(threading.Thread):
   def __init__(self):
     threading.Thread.__init__(self)
-
+    self.daemon=True
+    
   def run(self):
       while True:  
-        message = s.recv()
+        message = s.recv()   # receive a message
         print (bytes.decode(message))
 
 context = zmq.Context()
