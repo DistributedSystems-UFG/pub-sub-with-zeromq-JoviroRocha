@@ -86,7 +86,7 @@ while menu != 0:
       topic = input("Enter the topic: ")
       message = input("Enter the message: ")
       conn.root.exposed_publish(topic, message)
-    if(menu == "2"):
+    elif(menu == "2"):
       user = input("Enter the user you want to send your message to: ")
       answear = conn.root.exposed_finduser(user)
       if answear == "User not found!":
