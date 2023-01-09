@@ -33,6 +33,7 @@ class RecvHandler(threading.Thread):
   def __init__(self, sock):
     threading.Thread.__init__(self)
     self.client_socket = sock
+    self.daemon=True
 
   def run(self):
     while True:
