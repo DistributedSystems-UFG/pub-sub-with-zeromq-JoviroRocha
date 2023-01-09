@@ -60,7 +60,7 @@ login()
 # socket direct message
 client_sock = socket(AF_INET, SOCK_STREAM) # socket for server to connect to this client
 my_port = "5680"
-client_sock.bind((my_ip, my_port))
+client_sock.bind((my_ip, int(my_port)))
 client_sock.listen(5)
 recv_handler = RecvHandler(client_sock)
 recv_handler.start()
