@@ -9,7 +9,7 @@ import pickle
 class Chating(rpyc.Service):
 
     def exposed_publish(self, topic, message):      
-        msg = str.encode("NEW MESSAGE FROM THE GROUP: " + topic + " - " + message)
+        msg = str.encode( topic + " " + message)
         s.send(msg) # publish the current time
     
     def exposed_finduser(self, name):

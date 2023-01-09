@@ -52,7 +52,9 @@ class SubscriberHandler(threading.Thread):
 
   def run(self):
       while True:  
-        message = s.recv()   # receive a message
+        message = s.recv()   
+        print(message)
+        print(type(message))
         print (bytes.decode(message))
 
 # Connects to RPC
