@@ -87,12 +87,12 @@ while menu != 0:
       conn.root.exposed_publish(topic, message)
     if(menu == "2"):
       user = input("Enter the user you want to send your message to: ")
-      answaear = conn.root.exposed_finduser(user)
+      answear = conn.root.exposed_finduser(user)
       if answear == "User not found!":
         print(answear, "\n")
       message = input("Enter your message: ")
       answear = conn.root.exposed_sendmessage(name, user, message)
-      if answaear == "Error":
+      if answear == "Error":
         print("An error ocurred!\nTry again later!\n")
       else:
         print("Your message was sent!\n")
