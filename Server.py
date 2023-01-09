@@ -46,7 +46,7 @@ class Chating(rpyc.Service):
         ip = data[user][0]
         client_sock = socket(AF_INET, SOCK_STREAM)
         try:
-            client_sock.connect((ip, "5680"))
+            client_sock.connect((ip, 5680))
         except error:
             print(error)
             return "Error"
