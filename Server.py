@@ -12,7 +12,7 @@ class Chating(rpyc.Service):
         s.send(msg) # publish the current time
     
     def exposed_finduser(self, name):
-        f = open(constPS.filename, "x")
+        f = open(constPS.filename)
         data = json.load(f)
         if name in data:
             f.close()
