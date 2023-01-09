@@ -43,7 +43,6 @@ class RecvHandler(threading.Thread):
         msg_pack = pickle.loads(marshaled_msg_pack) 
         print("\n\nYou got a new direct message!\nMESSAGE: " + msg_pack[0] + " - FROM: " + msg_pack[1] + '\n')
         conn.close()
-        return
 
 class SubscriberHandler(threading.Thread):
   def __init__(self):
