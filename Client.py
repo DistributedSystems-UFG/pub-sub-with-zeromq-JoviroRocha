@@ -102,4 +102,4 @@ while menu != 0:
       sys.exit()
     else:
       print("Could not understand!\nPlease try again!\n")
-    menu = input()
+    menu = input("Choose the option that best fit your needs: \n1 - Send a group message. \n2 - Send a message to a user\n")
