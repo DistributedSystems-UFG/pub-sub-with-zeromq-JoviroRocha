@@ -10,6 +10,7 @@ my_ip = ""
 name = ""
 
 def login():
+  global name
   name = input("Enter your name: ")
   answear = conn.root.exposed_finduser(name)
   if answear == "Found":
