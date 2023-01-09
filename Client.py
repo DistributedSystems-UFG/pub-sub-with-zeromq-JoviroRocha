@@ -52,7 +52,8 @@ class SubscriberHandler(threading.Thread):
 
   def run(self):
       while True:  
-        message = s.recv()   
+        message = s.recv()
+        message = bytes.decode(message)   
         print(message)
         print(type(message))
         print (bytes.decode(message))
