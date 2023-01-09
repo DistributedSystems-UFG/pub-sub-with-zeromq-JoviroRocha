@@ -89,8 +89,9 @@ while menu != 0:
     elif(menu == "2"):
       user = input("Enter the user you want to send your message to: ")
       answear = conn.root.exposed_finduser(user)
-      if answear == "User not found!":
-        print(answear, "\n")
+      if answear == "Not Found":
+        print("User " + answear, "\n")
+        continue
       message = input("Enter your message: ")
       answear = conn.root.exposed_sendmessage(name, user, message)
       if answear == "Error":
