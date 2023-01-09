@@ -47,7 +47,8 @@ class Chating(rpyc.Service):
         client_sock = socket(AF_INET, SOCK_STREAM)
         try:
             client_sock.connect((ip, "5680"))
-        except:
+        except error:
+            print(error)
             return "Error"
         msg_pack = (message, name)
         marshaled_msg_pack = pickle.dumps(msg_pack)
