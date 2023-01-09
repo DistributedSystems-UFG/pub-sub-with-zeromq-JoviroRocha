@@ -53,8 +53,8 @@ class SubscriberHandler(threading.Thread):
   def run(self):
       while True:  
         message = s.recv()   
-        print("You've got a new message from a group!\n")
-        print (bytes.decode(message))
+        print("You've got a new message from a group: ")
+        print (bytes.decode(message) + "\n")
 
 # Connects to RPC
 conn = rpyc.connect(constPS.HOST, constPS.PORT_RPYC)
